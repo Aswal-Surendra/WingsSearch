@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link href="style/style.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+   
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/style-ie.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!--[if IE]>
+    <link href="style/style-ie.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+</head>
+<body>    
+    @*<table align="right">
+        <tr><td>Welcome @HttpContext.Current.Session["key"].ToString();</td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<td>@Html.ActionLink("Logout", "Logout", "Login")</td></tr>
+    </table>*@
+    @*<script src="~/Scripts/jquery.validate.js"></script> 
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>*@
+    
+    @if(Session["key"] != null)
+    { 
+    <div style="text-align:left">Welcome @HttpContext.Current.Session["key"].ToString()!!!!</div> 
+    }
+    else
+    { 
+    <div style="text-align:left">Welcome Please login first for the current user</div>
+    }
+
+
+    <div style="text-align:right"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Logout", "Logout", "Login")</div>
+    
+        <center>
+        <div class="wrapper">
+            <div class="logo">Saini Brothers</div>
+            <div class="menu">
+                <div id="menu">
+                    <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Sales", "Index", "Sales") </li>
+                        <li>@Html.ActionLink("Purchase", "GetPurchaseHome", "Purchase")</li>
+                        <li><a href="#">Repots</a>
+                        <ul>
+                            <li>@Html.ActionLink("Sales", "Index", "SalesReport")</li>
+                            <li><a href="#">Purchase</a></li>
+                        </ul>
+
+                        </li>
+                        <li style="width:200px"><a href="#">Review Stock</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        @*<div class="search">
+                <div class="search-text">
+                    Search the world of shopping!&nbsp;
+                    <input type="text" size="40" />
+                    &nbsp;&nbsp;
+                </div>
+                <div style="float:left; margin-left:5px; margin-top:10px;">
+                    <input type1="image" src="~/images/search.jpg" />
+                </div>
+            </div>*@
+        <div class="hot-search">
+            <div class="hot-search-text"> </div>
+        </div>
+        <div class="body-wrapper">
+
+            @*<div class="body-right">
+                    <div class="body-right-box1">
+                        <div class="right-topic-title"> Favourite Items</div>
+                        <br />
+                        <div style="width:170px;padding-left:10px;">
+                            <img src="~/images/mobile.jpg" style="float:left; margin-right: 0px;" alt="" />
+                            <div style="width:140px; text-align:right; padding-left:3px;">
+                                <div class="product-title"> Nokia 8800 Arte</div>
+                                <div class="product-price"> prices &nbsp;from &nbsp;&pound;749.99</div>
+                                <div class="product-compare"> <u>Compare..</u>&nbsp;<img src="~/images/proceed.jpg" style="padding-top: 3px;" alt="" /></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="width:170px;padding-left:10px;padding-top:3px;">
+                            <img src="~/images/mobile.jpg" style="float:left; margin-right: 0px;" alt="" />
+                            <div style="width:140px; text-align:right; padding-left:3px;">
+                                <div class="product-title"> Nokia 8800 Arte</div>
+                                <div class="product-price"> prices &nbsp;from &nbsp;&pound;749.99</div>
+                                <div class="product-compare"> <u>Compare..</u>&nbsp;<img src="~/images/proceed.jpg" style="padding-top: 3px;" alt="" /></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="width:170px;padding-left:10px;padding-top:1px;">
+                            <img src="~/images/mobile.jpg" style="float:left; margin-right: 0px;" alt="" />
+                            <div style="width:140px; text-align:right; padding-left:3px;">
+                                <div class="product-title"> Nokia 8800 Arte</div>
+                                <div class="product-price"> prices &nbsp;from &nbsp;&pound;749.99</div>
+                                <div class="product-compare"> <u>Compare..</u>&nbsp;<img src="~/images/proceed.jpg" style="padding-top: 3px;" alt="" /></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="width:170px;padding-left:10px;padding-top:2px;">
+                            <img src="~/images//mobile.jpg" style="float:left; margin-right: 0px;" alt="" />
+                            <div style="width:140px; text-align:right; padding-left:3px;">
+                                <div class="product-title"> Nokia 8800 Arte</div>
+                                <div class="product-price"> prices &nbsp;from &nbsp;&pound;749.99</div>
+                                <div class="product-compare"> <u>Compare..</u>&nbsp;<img src="~/images/proceed.jpg" style="padding-top: 3px;" alt="" /></div>
+                            </div>
+                        </div>
+                        <br />
+                        <div style="width:170px;padding-left:10px;padding-top:2px;">
+                            <img src="~/images/mobile.jpg" style="float:left; margin-right: 0px;" alt="" />
+                            <div style="width:140px; text-align:right; padding-left:3px;">
+                                <div class="product-title"> Nokia 8800 Arte</div>
+                                <div class="product-price"> prices &nbsp;from &nbsp;&pound;749.99</div>
+                                <div class="product-compare"> <u>Compare..</u>&nbsp;<img src="~/images/proceed.jpg" style="padding-top: 3px;" alt="" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="separator"> &nbsp;</div>
+                    <div class="body-right-ad1"> &nbsp;</div>
+                    <div class="separator"> &nbsp;</div>
+                    <div class="body-right-ad2"> &nbsp;</div>
+                    <div class="separator"> &nbsp;</div>
+                    <div class="body-right-ad3"> &nbsp;</div>
+                </div>*@
+            @*<div class="divider1"> &nbsp;</div>*@
+            <div class="body-middle">
+
+
+                @RenderBody()
+
+
+
+            </div>
+            @*<div class="divider2"> &nbsp;</div>*@
+            @*<div class="body-left">
+                    <div class="left-main-title"> Shopping Categories</div>
+                    <div class="left-topic-title"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:25px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:28px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:30px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:30px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:30px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                    <div class="left-topic-title" style="padding-top:30px;"> Books, DVD&#8217;s &amp; Music</div>
+                    <div class="left-topic-desc"> CD&#8217;s, Magazine Subscriptions, 300: The Movie, &amp; more..</div>
+                </div>*@
+        </div>
+        <div class="separator-main"> &nbsp;</div>
+        <div class="footer">
+            <div class="footer-text" style="padding-top:10px;margin-left:20px;"> <a href="#" class="nav1">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">Categories</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">User Guide</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">Reviews</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">Hot Deals</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">FAQ&#8217;s</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="nav1">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#dbdbdb">|</span>&nbsp;&nbsp;<a href="#" class="nav1">Privacy Policy</a></div>            
+        </div>
+    </center>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/datatables")
+    @Scripts.Render("~/bundles/datatables")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+@*<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>*@

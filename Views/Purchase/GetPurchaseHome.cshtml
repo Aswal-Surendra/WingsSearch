@@ -1,0 +1,110 @@
+﻿@model SaniShop.Models.PurchasemasterModal
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+ <h2>Purchase Home</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetPurchaseHome</title>
+    
+</head>
+<body>
+    <div> 
+@using (Html.BeginForm())
+{
+        <table>
+            <tr>
+                <td align="left">SupplierName</td>
+                <td>
+
+                    @Html.DropDownListFor(m => m.supplier_id, Model.supplierName, "--Select One--",
+                    new { @class = "form-control", @Onchange = "fillProductName()" }) 
+                 </td>
+
+               @*@Html.TextBoxFor(m =>m.SupplierName)</td>*@
+            </tr>
+
+            <tr>
+                <td align="left">ProductName</td>
+                <td>
+                 @Html.DropDownListFor(m => m.Productname,
+                new SelectList(Enumerable.Empty<SelectListItem>(), "product_Id", "productname"), "--Select product--",
+                new { @class = "form-control" })
+                @*<td>@Html.TextBoxFor(m => m.product_name)</td>*@
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>Description</td>
+                <td>@Html.TextBoxFor(m =>m.Description)</td>
+            </tr>
+
+            <tr>
+                <td>Quantity</td>
+                <td>@Html.TextBoxFor(m => m.Quantity)</td>
+            </tr>
+
+            <tr>
+                <td>Price</td>
+                <td>@Html.TextBoxFor(m => m.price)</td>
+            </tr>
+
+            <tr>
+                <td>AdditionalComments</td>
+                <td>@Html.TextAreaFor(m => m.additionalComment)</td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align:center">
+                     <input type="submit" name="save" value="save" />
+                </td>
+            </tr>
+        </table>
+}
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function fillProductName() {
+        debugger;
+        var SupplierId = jQuery.trim(jQuery('#supplier_id').val());
+        $.ajax({
+            url: '/Purchase/fillProductName',
+            type: "GET",
+            dataType: "JSON",
+            data: { supplierId: SupplierId },
+            success: function (data) {
+                $("#Productname").html(""); // clear before appending new list 
+                $.each(data, function (i, sup) {
+                    $("#Productname").append($('<option></option>').val(sup.id).html(sup.sup));
+                    //$("#Description").append(jQuery.trim(jQuery('#Description').val(watt.description)));
+                    //$("#Product_price").append(jQuery.trim(jQuery('#Product_price').val(watt.price)));
+                });
+            }
+        });
+    }
+
+        function Onchange() {
+    //    var quantity = jQuery.trim(jQuery('#Quantity').val());
+    //    var price = jQuery.trim(jQuery('#Product_price').val());
+        var productid = jQuery.trim(jQuery('#Product_id').val());
+        $.ajax({
+            type: "POST",
+            url: "/Purchase/GetPurchaseHome",
+            data: {  Productid: productid },
+            success: function (response) {
+                if (response != null) {
+                    jQuery.trim(jQuery('').val(response));
+                }
+            }
+        });
+    }
+</script>

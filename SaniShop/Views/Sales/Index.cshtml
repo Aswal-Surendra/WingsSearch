@@ -1,0 +1,180 @@
+﻿@model SaniShop.Models.SalesDetailModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <html>
+    <body>
+        <div class="body-right">
+         @Html.ActionLink("Sales History", "salesDataView", "Sales")
+        </div>
+
+        <div>
+            <table class="table" style="width:auto">
+                <tr>
+                    <td align="left">Product </td>
+                    <td>
+                      @Html.DropDownListFor(m => m.Product_id, Model.Productname, "--Select Product--", 
+                       new { @class = "form-control", @onchange = "FillWatt()" })                   
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">Watt </td>
+                    <td>
+                       @Html.DropDownListFor(m => m.wattmain,
+                new SelectList(Enumerable.Empty<SelectListItem>(), "wattid", "wattmain"), "--Select Watt--", new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">Iteam Discrption</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Description, new { @class = "inputComn" })
+                    </td>
+                </tr>                
+                 <tr>
+                    <td align="left">Price(Per Iteam)</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Product_price, new { @class = "inputComn" })
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">Quantity(In Count) </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Quantity, new { @class = "inputComn", @onchange = "Onchange()"})
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">Total Amount</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.TotalAmount, new { @class = "inputComn" })
+                    </td>
+                </tr>   
+                <tr>
+                    <td align="left">Additional Comments</td>
+                    <td>
+                        @Html.TextAreaFor(m => m.AdditionalComments, new { @class = "inputComn" })
+                    </td>
+                </tr>
+
+
+            </table>
+            <table class="table" style="width:auto">
+                <tr style="text-align:center">
+        <td colspan="2" style="text-align:center">
+            <input type="submit" id="Submit1" name="save" value="save" />
+        </td>
+    </tr>
+</table>
+        </div>
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Data Saved Successfully !!!</p>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#Submit1").click(function () {
+            return checkAuthentication();
+        });
+    });
+
+    $("#Close").click(function () {
+        $.ajax({
+            url: '/Sales/Index',
+            type: "GET",
+            success: function (data) {
+                jQuery.trim(jQuery('#Quantity').val(''));
+                jQuery.trim(jQuery('#TotalAmount').val(''));
+                jQuery.trim(jQuery('#Description').val(''));
+                jQuery.trim(jQuery('#Product_price').val(''));
+                jQuery.trim(jQuery('#AdditionalComments').val(''));
+            }
+        });
+    });
+    debugger;
+    function checkAuthentication() {
+        var item = $("#Product_id option:selected").text();  //jQuery.trim(jQuery('#Product_id').text());
+        var watt = $("#wattmain option:selected").text();  //jQuery.trim(jQuery('#wattmain').text());
+        var quantity = jQuery.trim(jQuery('#Quantity').val());
+        var totalamount = jQuery.trim(jQuery('#TotalAmount').val());
+        var desc = jQuery.trim(jQuery('#Description').val());
+        var price = jQuery.trim(jQuery('#Product_price').val());
+        var comments = jQuery.trim(jQuery('#AdditionalComments').val());
+
+        if (desc == "" && price == "") {
+            alert('Please enter the discription and price')
+            return false;
+        }
+            
+        else {
+            debugger;
+           var url = 
+             $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                data: { Quantity: quantity, Item: item, Watts: watt, TotalAmo: totalamount, Desc: desc, Price: price, Addcomments: comments },
+                success: function (data) {                    
+                    if (data.IsSuccess) {                     
+                        $("#myModal").modal('show');
+                    }                   
+                 },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    }
+    function FillWatt() {
+        var productid = jQuery.trim(jQuery('#Product_id').val());
+        $.ajax({
+            url: '/Sales/FillWatt',
+            type: "GET",
+            dataType: "JSON",
+            data: { Productid: productid },
+            success: function (data) {
+                $("#wattmain").html(""); // clear before appending new list 
+                $.each(data, function (i, watt) {
+                    $("#wattmain").append( $('<option></option>').val(watt.id).html(watt.watt));
+                    $("#Description").append(jQuery.trim(jQuery('#Description').val(watt.description)));
+                    $("#Product_price").append(jQuery.trim(jQuery('#Product_price').val(watt.price)));
+                });
+            }
+        });
+    }
+    
+    function Onchange(){        
+            var quantity = jQuery.trim(jQuery('#Quantity').val());                        
+            var price = jQuery.trim(jQuery('#Product_price').val());
+            var productid = jQuery.trim(jQuery('#Product_id').val());
+            $.ajax({
+                type: "POST",
+                url: "/Sales/TotalAmount",
+                data: { Quantity: quantity, Unitprice: price, Productid: productid},
+                success: function (response) {
+                    if (response != null) {
+                        jQuery.trim(jQuery('#TotalAmount').val(response));
+                    }
+                }
+            });   
+    }
+</script>

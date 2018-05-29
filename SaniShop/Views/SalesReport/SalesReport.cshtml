@@ -1,0 +1,40 @@
+﻿@model SaniShop.Models.PurchasemasterModal
+@{
+    ViewBag.Title = "SalesReport";
+}
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<h2>SalesReport</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sales Report</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <table class="table" style="width:auto">
+                <tr>
+                    <td align="left">SupplierName</td>
+
+                    <td>
+                        @Html.DropDownListFor(m => m.supplier_id, Model.supplier_Name, "select supplier",
+                    new { @class = "form-control", @Onchange = "fillProductName()" })
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>
+

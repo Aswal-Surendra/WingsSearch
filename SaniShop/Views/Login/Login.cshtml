@@ -1,0 +1,49 @@
+﻿@model SaniShop.Models.Users
+
+@{
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    @using (Html.BeginForm("Login","Login"))
+    {
+        @Html.ValidationSummary(true, "Login failed. Check your login details.");
+        <div>
+            <fieldset>
+                <legend>Login</legend>
+                <div class="editor-label">
+                    @Html.LabelFor(u => u.UserName)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(u => u.UserName)                    
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(u => u.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(u => u.Password)                    
+                </div>
+                <div class="editor-label">
+                    @Html.CheckBoxFor(u => u.RememberMe)
+                    @Html.LabelFor(u => u.RememberMe)
+                </div>
+                <input type="submit" value="Log In" name="Login" />
+                @Html.ActionLink("Registeration", "register1", "Login")
+            </fieldset>
+        </div>
+        @*<div>
+            <div class="editor-label">
+                @Html.LabelFor(u => u.username)
+            </div>
+            <input type="submit" value="Register"
+        </div>*@
+    }
+</body>
+</html>

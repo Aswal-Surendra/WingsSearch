@@ -1,0 +1,173 @@
+﻿@model SaniShop.Models.RegiterModal
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<h2>Register</h2>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    @using (Html.BeginForm("Register1", "Login"))
+    {
+        
+        <table class="table" style="width:auto">
+
+            @Html.ValidationSummary(true)
+            
+                <tr><td> Username: </td> <td>@Html.TextBoxFor(u => u.username )
+                   </td><td>@Html.ValidationMessageFor(u => u.username)</td> </tr>
+          
+                 <tr> <td>Password:</td><td>@Html.TextBoxFor(u => u.UserPassword, new { @class = "inputComn",type="Password" })
+                                            </td><td>@Html.ValidationMessageFor(u => u.UserPassword)</td></tr>
+
+                <tr> <td>Email:</td><td>@Html.TextBoxFor(u => u.Email)
+                                       </td><td>@Html.ValidationMessageFor(u => u.Email)</td></tr>
+   
+            <tr> <td>Mobile:</td><td>@Html.TextBoxFor(u => u.mobile)
+                    </td><td>@Html.ValidationMessageFor(u => u.mobile) <td> </td></tr>
+
+                <tr> <td>City:</td><td>@Html.TextBoxFor(u => u.city)
+                   </td><td>@Html.ValidationMessageFor(u => u.city)</td></tr>
+            <tr>
+                <td colspan="5" style="text-align:center">
+                <input type="submit" id="Register" value="Register" />
+                    
+                            </td>
+            </tr>
+        
+        
+        
+            </table>
+            
+            
+
+    }
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Data Saved Successfully !!!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    $(document).ready(function () {
+        $("#Register").click(function () {
+
+
+                var username = jQuery.trim(jQuery('#username').val());
+                if (username == "")
+                {
+                    alert("Plese enter the username");
+                    return false;
+                }
+
+                var userpassword = jQuery.trim(jQuery('#UserPassword').val());
+                if (userpassword == "") {
+                    alert("Plese enter the userpassword");
+                    return false;
+                }
+                var email = jQuery.trim(jQuery('#Email').val());
+                if (email == "") {
+                    alert("Plese enter the email");
+                    return false;
+                }
+
+                var result = jQuery.trim(jQuery('#mobile').val());
+
+                var resul = validatePhone(result);
+                if (resul == false) {
+                    alert("Please Enter the Right Mobile No");
+                    return false;
+                }
+                var City = jQuery.trim(jQuery('#city').val());
+                if (City == "") {
+                    alert("Plese enter the City");
+                    return false;
+                }
+
+        });
+        });
+    //$(document).ready(function () {
+    //    $("#Register").click(function () {
+    //        return validatePhone();
+    //    debugger;
+        
+    //    var Username= jQuery.trim(jQuery('#username').val());
+    //    var userPassword= jQuery.trim(jQuery('#UserPassword').val());
+    //    var email= jQuery.trim(jQuery('#Email').val());
+    //    var mobile= jQuery.trim(jQuery('#mobile').val());
+    //    var City = jQuery.trim(jQuery('#city').val());
+
+    //    var result = validatePhone(mob);
+    //    if (result == false) {
+    //        alert("Please Enter the Right Mobile No");
+    //        return false;
+    //    }
+
+    //    //else {
+                     
+    //    //            var email = jQuery.trim(jQuery('#Email').val());
+    //    //            var result = validateEmail(email)
+    //    //            if (result == false) {
+    //    //                alert("Please Enter the correct email")
+    //    //                return false;    
+    //    //            }
+    //    //}
+    //    $.ajax({
+    //        url: '/Login/Register1',
+    //        type: "GET",
+    //        success: function (data) {
+    //            jQuery.trim(jQuery())
+    //            jQuery.trim(jQuery('#username').val(''));
+    //            jQuery.trim(jQuery('#UserPassword').val(''));
+    //            jQuery.trim(jQuery('#Email').val(''));
+    //            jQuery.trim(jQuery('#mobile').val(''));
+    //            jQuery.trim(jQuery('#city').val(''));
+    //        }
+    //    });
+    //    });
+    //});
+
+
+    
+
+    function validatePhone(txtPhone) {
+        var a = txtPhone;
+        var filter = /^[0-9-+]+$/;
+        if (filter.test(a)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    //function validateEmail($email) {
+    //    var emailReg = /^([\w+[\w-]{2,4})?$/;
+    //    return emailReg.test($email);
+    //}
+    
+</script>
+

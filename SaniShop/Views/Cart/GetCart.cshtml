@@ -1,0 +1,78 @@
+﻿@model IEnumerable<SaniShop.Models.Product_Summary>
+
+@{
+    ViewBag.Title = "GetCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h3>Get Cart</h3>
+<div>
+    <table align="right">
+        <tr>
+            <td>
+                <b>  @ViewBag.Count  </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="~/images/CartImage/Shopping_cart_icon.svg.png" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <table class="table" align="center" width="70%">
+        <tr><td>Products</td><td>Sub Products</td> <td>Prices</td><td>Select Product</td></tr>
+      @if(Model != null)
+          {
+          foreach (var item in Model)
+          {
+            <tr>
+                <td>
+                    @item.Product_Name
+                </td>
+                <td>
+                    @item.Sub_Product_Name
+                </td>
+                <td>
+                    @item.Product_Price
+                </td>
+                <td>
+                    <input checked="checked" id="cartid" class="cartItem"
+                           type="checkbox" value=@item.Produc_id>
+                </td>
+
+            </tr>
+        }
+    }
+        <tr><td><input type="button" id="btn" value="Add To Cart" name="Add To Cart" /></td></tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn").click(function () {           
+            var chkArray = [];
+            $(".cartItem:checked").each(function () {
+                chkArray.push($(this).val());
+            });
+            var selected = chkArray.join(',');
+            alert(selected);
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: "GET",
+                dataType: "JSON",
+                data: { selected: selected },
+                success: function (data) {                
+                    $.ajax({
+                        url: '/Cart/GetCart',
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function (data) {
+                        }
+                    });
+                }
+            });           
+        });
+                        
+    });
+</script>
+

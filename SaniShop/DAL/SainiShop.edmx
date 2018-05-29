@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SainiShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart_Details">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Product_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sub_Product_Price" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sub_Product_TFN" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sub_Product_MFD" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sub_Product_Discount" Type="nvarchar" MaxLength="100" />
+          <Property Name="Product_Categoris" Type="int" />
+        </EntityType>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="CompliantID" />
+          </Key>
+          <Property Name="CompliantID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CustomerMobileNUmber" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="CompliantDate" Type="datetime" Nullable="false" />
+          <Property Name="CompliantCloseDate" Type="datetime" Nullable="false" />
+          <Property Name="CompliantItem" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="CompliantCharge" Type="money" Nullable="false" />
+          <Property Name="CompliantPayment" Type="money" Nullable="false" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Total_purchase" Type="int" Nullable="false" />
+          <Property Name="Customer_mobNumber" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Product_Master">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ProductMaster">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="UnitperPrice" Type="int" />
+          <Property Name="marginPerUnit" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchase_id" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_name" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="8000" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="100" />
+          <Property Name="PurchaseDate" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="additionalComment" Type="varchar" MaxLength="5000" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Regitration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="256" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="256" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="mobile" Type="char" MaxLength="10" />
+          <Property Name="registerdate" Type="varchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+          <Property Name="Transation_date" Type="datetime" />
+          <Property Name="Amount_paid" Type="int" Nullable="false" />
+          <Property Name="Paid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales_Details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sales_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_price" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="nvarchar" MaxLength="50" />
+          <Property Name="sales_date" Type="nvarchar" MaxLength="50" />
+          <Property Name="watt" Type="int" />
+          <Property Name="Wire_meter" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+          <Property Name="AdditionalComments" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="SupplierMaster">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SupplierAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SupplierMobileNumber" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="SupplierEmail" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegDate" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WattMaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="watt" Type="int" />
+          <Property Name="product_id" Type="int" />
+        </EntityType>
+        <Function Name="productproc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="product_id" Type="int" Mode="In" />
+          <Parameter Name="product_name" Type="varchar" Mode="In" />
+          <Parameter Name="suppliers_id" Type="int" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SainiShopModelStoreContainer">
+          <EntitySet Name="Cart_Details" EntityType="Self.Cart_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Master" EntityType="Self.Product_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductMaster" EntityType="Self.ProductMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regitration" EntityType="Self.Regitration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales_Details" EntityType="Self.Sales_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierMaster" EntityType="Self.SupplierMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WattMaster" EntityType="Self.WattMaster" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SainiShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="CompliantID" />
+          </Key>
+          <Property Name="CompliantID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerMobileNUmber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CompliantDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompliantCloseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompliantItem" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompliantCharge" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CompliantPayment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PaymentMode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Total_purchase" Type="Int32" Nullable="false" />
+          <Property Name="Customer_mobNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProductMaster">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UnitperPrice" Type="Int32" />
+          <Property Name="marginPerUnit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+          <Property Name="Transation_date" Type="DateTime" Precision="3" />
+          <Property Name="Amount_paid" Type="Int32" Nullable="false" />
+          <Property Name="Paid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierMaster">
+          <Key>
+            <PropertyRef Name="SupplierId" />
+          </Key>
+          <Property Name="SupplierId" Type="Int32" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SupplierAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SupplierMobileNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SupplierEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WattMaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="watt" Type="Int32" />
+          <Property Name="product_id" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="SainiShopEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Complaints" EntityType="Self.Complaint" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="ProductMasters" EntityType="Self.ProductMaster" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="SupplierMasters" EntityType="Self.SupplierMaster" />
+          <EntitySet Name="WattMasters" EntityType="Self.WattMaster" />
+          <FunctionImport Name="productproc">
+            <Parameter Name="product_id" Mode="In" Type="Int32" />
+            <Parameter Name="product_name" Mode="In" Type="String" />
+            <Parameter Name="suppliers_id" Mode="In" Type="Int32" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PurchaseDetails" EntityType="SainiShopModel.PurchaseDetail" />
+          <EntitySet Name="Sales_Details" EntityType="SainiShopModel.Sales_Details" />
+          <EntitySet Name="Users" EntityType="SainiShopModel.User" />
+          <EntitySet Name="Regitrations" EntityType="SainiShopModel.Regitration" />
+          <EntitySet Name="Product_Master" EntityType="SainiShopModel.Product_Master" />
+          <EntitySet Name="Cart_Details" EntityType="SainiShopModel.Cart_Details" />
+        </EntityContainer>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchase_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="additionalComment" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Sales_Details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sales_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sales_date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="watt" Type="Int32" />
+          <Property Name="Wire_meter" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalComments" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Regitration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="registerdate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product_Master">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cart_Details">
+          <Key>
+            <PropertyRef Name="P_id" />
+          </Key>
+          <Property Name="P_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Product_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Product_Price" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Product_TFN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Product_MFD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sub_Product_Discount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Categoris" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SainiShopModelStoreContainer" CdmEntityContainer="SainiShopEntities1">
+          <EntitySetMapping Name="Complaints">
+            <EntityTypeMapping TypeName="SainiShopModel.Complaint">
+              <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="CompliantID" ColumnName="CompliantID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerMobileNUmber" ColumnName="CustomerMobileNUmber" />
+                <ScalarProperty Name="CompliantDate" ColumnName="CompliantDate" />
+                <ScalarProperty Name="CompliantCloseDate" ColumnName="CompliantCloseDate" />
+                <ScalarProperty Name="CompliantItem" ColumnName="CompliantItem" />
+                <ScalarProperty Name="CompliantCharge" ColumnName="CompliantCharge" />
+                <ScalarProperty Name="CompliantPayment" ColumnName="CompliantPayment" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SainiShopModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Customer_name" ColumnName="Customer_name" />
+                <ScalarProperty Name="Total_purchase" ColumnName="Total_purchase" />
+                <ScalarProperty Name="Customer_mobNumber" ColumnName="Customer_mobNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductMasters">
+            <EntityTypeMapping TypeName="SainiShopModel.ProductMaster">
+              <MappingFragment StoreEntitySet="ProductMaster">
+                <ScalarProperty Name="marginPerUnit" ColumnName="marginPerUnit" />
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Product_name" ColumnName="Product_name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitperPrice" ColumnName="UnitperPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="SainiShopModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="Transation_date" ColumnName="Transation_date" />
+                <ScalarProperty Name="Amount_paid" ColumnName="Amount_paid" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierMasters">
+            <EntityTypeMapping TypeName="SainiShopModel.SupplierMaster">
+              <MappingFragment StoreEntitySet="SupplierMaster">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierAddress" ColumnName="SupplierAddress" />
+                <ScalarProperty Name="SupplierMobileNumber" ColumnName="SupplierMobileNumber" />
+                <ScalarProperty Name="SupplierEmail" ColumnName="SupplierEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WattMasters">
+            <EntityTypeMapping TypeName="SainiShopModel.WattMaster">
+              <MappingFragment StoreEntitySet="WattMaster">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="watt" ColumnName="watt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="productproc" FunctionName="SainiShopModel.Store.productproc" />
+          <EntitySetMapping Name="PurchaseDetails">
+            <EntityTypeMapping TypeName="SainiShopModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetails">
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="additionalComment" ColumnName="additionalComment" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales_Details">
+            <EntityTypeMapping TypeName="SainiShopModel.Sales_Details">
+              <MappingFragment StoreEntitySet="Sales_Details">
+                <ScalarProperty Name="AdditionalComments" ColumnName="AdditionalComments" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Wire_meter" ColumnName="Wire_meter" />
+                <ScalarProperty Name="watt" ColumnName="watt" />
+                <ScalarProperty Name="sales_date" ColumnName="sales_date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Product_price" ColumnName="Product_price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_name" ColumnName="Product_name" />
+                <ScalarProperty Name="Sales_id" ColumnName="Sales_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SainiShopModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regitrations">
+            <EntityTypeMapping TypeName="SainiShopModel.Regitration">
+              <MappingFragment StoreEntitySet="Regitration">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="registerdate" ColumnName="registerdate" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Master">
+            <EntityTypeMapping TypeName="SainiShopModel.Product_Master">
+              <MappingFragment StoreEntitySet="Product_Master">
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_Details">
+            <EntityTypeMapping TypeName="SainiShopModel.Cart_Details">
+              <MappingFragment StoreEntitySet="Cart_Details">
+                <ScalarProperty Name="Product_Categoris" ColumnName="Product_Categoris" />
+                <ScalarProperty Name="Sub_Product_Discount" ColumnName="Sub_Product_Discount" />
+                <ScalarProperty Name="Sub_Product_MFD" ColumnName="Sub_Product_MFD" />
+                <ScalarProperty Name="Sub_Product_TFN" ColumnName="Sub_Product_TFN" />
+                <ScalarProperty Name="Sub_Product_Price" ColumnName="Sub_Product_Price" />
+                <ScalarProperty Name="Sub_Product_Name" ColumnName="Sub_Product_Name" />
+                <ScalarProperty Name="P_id" ColumnName="P_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

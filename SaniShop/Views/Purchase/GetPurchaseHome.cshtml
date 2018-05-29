@@ -1,0 +1,187 @@
+﻿@model SaniShop.Models.PurchasemasterModal
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+<h2>Purchase Home</h2>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetPurchaseHome</title>
+
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <table class="table" style="width:auto">
+                <tr>
+                    <td align="left">SupplierName</td>
+                    <td>
+
+                        @Html.DropDownListFor(m => m.supplier_id, Model.supplier_Name, "select supplier",
+                    new { @class = "form-control", @Onchange = "fillProductName()" })
+                    </td>
+
+                    @*@Html.TextBoxFor(m =>m.SupplierName)</td>*@
+                </tr>
+
+                <tr>
+                    <td align="left">ProductName</td>
+                    <td>
+                        @Html.DropDownListFor(m => m.Productname,
+                new SelectList(Enumerable.Empty<SelectListItem>(), "product_Id", "productname"),
+                new { @class = "form-control" })
+                        @*<td>@Html.TextBoxFor(m => m.product_name)</td>*@
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Description</td>
+                    <td>@Html.TextBoxFor(m => m.Description)</td>
+                </tr>
+
+                <tr>
+                    <td>Quantity</td>
+                    <td>@Html.TextBoxFor(m => m.Quantity)</td>
+                </tr>
+
+                <tr>
+                    <td>Price</td>
+                    <td>@Html.TextBoxFor(m => m.price)</td>
+                </tr>
+
+                <tr>
+                    <td>AdditionalComments</td>
+                    <td>@Html.TextAreaFor(m => m.additionalComment)</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <input type="submit" id="Purchase" name="save" value="save" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Data Saved Successfully !!!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Purchase").click(function () {
+            return checkAuthentication();
+        });
+    });
+    debugger;
+    $("#Close").click(function () {
+        $.ajax({
+            url: '/Purchase/GetPurchaseHome',
+            type: "GET",
+            success: function (data) {
+                jQuery.trim(jQuery())
+                jQuery.trim(jQuery('#Quantity').val(''));
+                  jQuery.trim(jQuery('#TotalAmount').val(''));
+                jQuery.trim(jQuery('#Description').val(''));
+                jQuery.trim(jQuery('#price').val(''));
+                jQuery.trim(jQuery('#additionalComment').val(''));
+            }
+        });
+    });
+    
+
+    function checkAuthentication() {
+        debugger;
+        var supid = $("#supplier_id option:selected").text();  //jQuery.trim(jQuery('#Product_id').text());
+        var proname = $("#Productname option:selected").text();  //jQuery.trim(jQuery('#wattmain').text());
+        var quantity = jQuery.trim(jQuery('#Quantity').val());
+        //var totalamount = jQuery.trim(jQuery('#TotalAmount').val());
+        var desc = jQuery.trim(jQuery('#Description').val());
+        var price = jQuery.trim(jQuery('#price').val());
+        var comments = jQuery.trim(jQuery('#additionalComment').val());
+
+        if (quantity == "" && price == "") {
+            alert('Please enter the discription and price')
+            return false;
+        }
+        else {
+            debugger;
+            $.ajax({
+                url: '/Purchase/GetPurchaseHome',
+                type: "POST",
+                dataType: "JSON",
+                data: { suplid: supid, Productname: proname, Quantity: quantity, Desc: desc, Price: price, Addcomments: comments },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        debugger;
+                        $("#myModal").modal('show');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    }
+
+    function fillProductName() {
+        debugger;
+        var SupplierId = jQuery.trim(jQuery('#supplier_id').val());
+        $.ajax({
+            url: '/Purchase/fillProductName',
+            type: "GET",
+            dataType: "JSON",
+            data: { supplierId: SupplierId },
+            success: function (data) {
+                $("#Productname").html(""); // clear before appending new list
+                $.each(data, function (i, sup) {
+                    $("#Productname").append($('<option></option>').val(sup.id).html(sup.sup));
+                    $("#Description").append(jQuery.trim(jQuery('#Description').val(sup.description)));
+                    //$("#Product_price").append(jQuery.trim(jQuery('#Product_price').val(watt.price)));
+                });
+            }
+        });
+    }
+
+    //function Onchange() {
+    //    debugger;
+    //    //    var quantity = jQuery.trim(jQuery('#Quantity').val());
+    //    var desc = jQuery.trim(jQuery('#Description').val());
+    //    var productid = jQuery.trim(jQuery('#Product_id').val());
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Purchase/GetPurchaseHome",
+    //        data: { Productid: productid, Desc: desc },
+    //        success: function (response) {
+    //            if (response != null) {
+    //                jQuery.trim(jQuery('').val(response));
+    //            }
+    //        }
+    //    });
+    //}
+</script>

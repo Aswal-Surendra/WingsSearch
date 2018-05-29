@@ -1,0 +1,27 @@
+﻿@model IEnumerable<SaniShop.DAL.Product_Master>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Cart Page</h3>
+
+<div>
+    <table class="table" align="center">
+        <tr><td>Id</td><td>Name</td></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.P_id
+                </td>
+                <td>
+                    <a href="@Url.Action("GetCart", "Cart", new { id = item.P_id })">@item.Product_Name</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
