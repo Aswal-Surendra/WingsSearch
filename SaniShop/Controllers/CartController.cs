@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
-using SaniShop.DAL;
-using SaniShop.Models;
+﻿using SaniShop.DAL;
 using SaniShop.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace SaniShop.Controllers
 {
     public class CartController : Controller
     {
+        private readonly ICartRepository _cartRepository;
+        public CartController(ICartRepository cartRepository)
+        {
+            _cartRepository = cartRepository;
+        }
         // GET: Cart
         public ActionResult Index()
         {
@@ -28,7 +29,7 @@ namespace SaniShop.Controllers
             try
             {
                     var cartRepository = new CartRepository();                
-                    var model = cartRepository.GetProduct(id);
+                    var model = _cartRepository.GetProduct(id);
                     return View(model);                
             }
             catch(Exception ex) {

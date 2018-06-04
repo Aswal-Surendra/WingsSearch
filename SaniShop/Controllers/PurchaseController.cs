@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SaniShop.Models;
 using SaniShop.DAL;
-
+using AutoMapper;
 
 namespace SaniShop.Controllers
 {
@@ -23,7 +23,7 @@ namespace SaniShop.Controllers
         public ActionResult GetPurchaseHome()
 
         {
-
+            var purchasemasterModal = new PurchasemasterModal();
             var db1 = new SainiShopEntities1();
             var query = db1.SupplierMasters.Select(c => new SelectListItem
             {
@@ -32,8 +32,7 @@ namespace SaniShop.Controllers
 
                 //Selected = c.Product_id.Equals(3)
             }).ToList();
-
-            var model = new PurchasemasterModal { supplier_Name = query.ToList() };
+            var model = new PurchasemasterModal { supplier_Name = query.ToList() };            
             return View(model);
         }
 

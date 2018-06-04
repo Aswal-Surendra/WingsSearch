@@ -7,7 +7,7 @@ using System.Web;
 
 namespace SaniShop.Repository
 {
-    public class CartRepository
+    public class CartRepository : ICartRepository
     {
         public IQueryable<Product_Summary> GetProduct(int id)
         {

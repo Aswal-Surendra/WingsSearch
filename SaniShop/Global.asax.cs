@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaniShop.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,8 +17,8 @@ namespace SaniShop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             System.Web.Optimization.BundleTable.EnableOptimizations = true;
+            MapperConfig.Main();
         }
     }
 }
